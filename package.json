@@ -1,0 +1,8 @@
+{
+  "name": "xstate-nextjs-workspaces-template",
+  "private": true,
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "author": "Mark Chandler <github@chanchan.io>"
+}

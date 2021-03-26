@@ -1,0 +1,10 @@
+node_modules/
+
+# build artifacts
+dist/
+
+# log files
+*.log
+
+# misc
+.DS_Store
