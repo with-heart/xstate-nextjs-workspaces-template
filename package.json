@@ -21,7 +21,7 @@
     "url": "https://github.com/with-heart/xstate-nextjs-workspaces-template"
   },
   "scripts": {
-    "build": "preconstruct build",
+    "build": "preconstruct build && manypkg run inspector build",
     "postinstall": "preconstruct dev && manypkg check",
     "start": "manypkg run inspector dev",
     "type-check": "manypkg exec yarn type-check"
