@@ -1,0 +1,14 @@
+{
+  "name": "machines",
+  "version": "0.0.0",
+  "main": "dist/machines.cjs.js",
+  "module": "dist/machines.esm.js",
+  "author": "Mark Chandler <github@chanchan.io>",
+  "license": "MIT",
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "xstate": "^4.17.0"
+  }
+}

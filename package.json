@@ -5,6 +5,9 @@
   "main": "index.js",
   "license": "MIT",
   "author": "Mark Chandler <github@chanchan.io>",
+  "workspaces": [
+    "machines"
+  ],
   "scripts": {
     "build": "preconstruct build",
     "postinstall": "preconstruct dev",
@@ -19,5 +22,10 @@
     "@tsconfig/recommended": "^1.0.1",
     "@types/node": "^14.14.36",
     "typescript": "^4.2.3"
+  },
+  "preconstruct": {
+    "packages": [
+      "machines"
+    ]
   }
 }
