@@ -6,11 +6,13 @@
   "license": "MIT",
   "author": "Mark Chandler <github@chanchan.io>",
   "workspaces": [
-    "machines"
+    "machines",
+    "inspector"
   ],
   "scripts": {
     "build": "preconstruct build",
-    "postinstall": "preconstruct dev",
+    "postinstall": "preconstruct dev && manypkg check",
+    "start": "manypkg run inspector dev",
     "type-check": "manypkg exec yarn type-check"
   },
   "dependencies": {
