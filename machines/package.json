@@ -1,5 +1,5 @@
 {
-  "name": "@your-scope-here/machines",
+  "name": "machines",
   "version": "0.0.0",
   "main": "dist/machines.cjs.js",
   "module": "dist/machines.esm.js",

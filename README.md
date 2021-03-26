@@ -8,12 +8,6 @@ This template provides a basic `yarn` workspaces monorepo for publishing an npm 
 
 Develop some machines using the inspector site to help visualize them, publish the `machines` package, then publish the Next.js site. BAM! You've got yourself a package of XState machines and a site where users can play with them!
 
-## Getting started
-
-If you're going to version and publish these packages, you'll want to be sure to update the `name` field in the `inspector` and `machines` packages. Right now they use the `@your-scope-here` scope, which is probably not what you want.
-
-I plan on adding tooling that will make it easy to version and publish the packages and generate changelogs, maybe.
-
 ## How does it work?
 
 ### Local development and build
