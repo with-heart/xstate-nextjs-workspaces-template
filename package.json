@@ -8,6 +8,18 @@
     "machines",
     "inspector"
   ],
+  "keywords": [
+    "xstate",
+    "next.js",
+    "monorepo",
+    "workspaces",
+    "template"
+  ],
+  "homepage": "https://github.com/with-heart/xstate-nextjs-workspaces-template",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/with-heart/xstate-nextjs-workspaces-template"
+  },
   "scripts": {
     "build": "preconstruct build",
     "postinstall": "preconstruct dev && manypkg check",
