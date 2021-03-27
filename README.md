@@ -8,6 +8,8 @@ This template provides a basic `yarn` workspaces monorepo for publishing an npm 
 
 Develop some machines using the inspector site to help visualize them, publish the `machines` package, then publish the Next.js site. BAM! You've got yourself a package of XState machines and a site where users can play with them!
 
+Check out a live version of the inspector site here: https://xstate-nextjs-workspaces-template.vercel.app/
+
 ## How does it work?
 
 ### Local development and build
