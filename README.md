@@ -66,5 +66,5 @@ Eventually I'd like to add [`changesets`](https://github.com/atlassian/changeset
 
 ## Credits
 
-- [@mattpocock](https://github.com/mattpocock) for building XState Catalogue, which is the main source of inspiration for this template, and for creating the gist I can no longer find that had the `MachineContainer` pattern I'm using in it.
+- [@mattpocock](https://github.com/mattpocock) for building XState Catalogue, which is the main source of inspiration for this template, and for [`xstate#2020`](https://github.com/davidkpiano/xstate/issues/2020) which pointed me to the need to use `patch-package` and also helped me discover the `MachineContainer` pattern
 - [@davidkpiano](https://github.com/davidkpiano) for being one hell of pianist. <sub>And for creating XState</sub>
