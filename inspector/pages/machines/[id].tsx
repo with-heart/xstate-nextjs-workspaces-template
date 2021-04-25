@@ -7,8 +7,8 @@ import React, {useEffect, useRef} from 'react'
 import {MachineLayout} from '../../components/MachineLayout'
 import {MachineView} from '../../components/MachineView'
 import {
+  exportedMachineFilenames,
   getMachinePaths,
-  getMachinesPath,
   machineFilenamesToIds,
   useGetImports,
 } from '../../utils/machines'
@@ -84,10 +84,9 @@ export const getStaticProps = async ({params}: {params: {id: string}}) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const fs = (await import('fs')).promises
-  const machinesPath = await getMachinesPath()
-  const files = await fs.readdir(machinesPath)
 
-  const ids = machineFilenamesToIds(files)
+  const machineFilenames = await exportedMachineFilenames(fs)
+  const ids = machineFilenamesToIds(machineFilenames)
   const paths = ids.map((id) => ({params: {id}}))
 
   return {

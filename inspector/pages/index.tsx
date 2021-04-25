@@ -1,7 +1,10 @@
 import {Box, Flex, Heading, ListItem, UnorderedList} from '@chakra-ui/layout'
 import {InferGetStaticPropsType, NextPage} from 'next'
 import {Link} from '../components/Link'
-import {getMachinesPath, machineFilenamesToIds} from '../utils/machines'
+import {
+  exportedMachineFilenames,
+  machineFilenamesToIds,
+} from '../utils/machines'
 
 const IndexPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   ids,
@@ -26,9 +29,9 @@ export default IndexPage
 
 export const getStaticProps = async () => {
   const fs = (await import('fs')).promises
-  const machinesPath = await getMachinesPath()
-  const files = await fs.readdir(machinesPath)
-  const ids = machineFilenamesToIds(files)
+
+  const machineFilenames = await exportedMachineFilenames(fs)
+  const ids = machineFilenamesToIds(machineFilenames)
 
   return {
     props: {

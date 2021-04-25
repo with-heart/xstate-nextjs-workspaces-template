@@ -1,7 +1,9 @@
 import {camelCase} from 'lodash/fp'
 import {ComponentType, useEffect, useState} from 'react'
 import {StateMachine} from 'xstate'
+import {fs} from '../interfaces/fs'
 import {MachinePageProps} from '../interfaces/MachinePageProps'
+import {getExportFileSources} from './file'
 
 /**
  * Represents various imports related to a machine.
@@ -9,6 +11,41 @@ import {MachinePageProps} from '../interfaces/MachinePageProps'
 export interface MachineImports {
   machine: StateMachine<any, any, any>
   page?: ComponentType<MachinePageProps<any>>
+}
+
+export const exportedMachineFilenames = async (fs: fs) => {
+  const path = await import('path')
+
+  const machinesPath = await getMachinesPath()
+  const files = await fs.readdir(machinesPath)
+
+  const indexContent = await fs.readFile(
+    path.resolve(machinesPath, 'index.ts'),
+    'utf-8',
+  )
+  const indexExportSources = getExportFileSources(indexContent)
+
+  const machineFilesWithExports = (
+    await Promise.all(
+      files.filter(isMachineFilename).map(async (file) => {
+        const filePath = path.resolve(machinesPath, file)
+        const content = await fs.readFile(filePath, 'utf-8')
+        return containsMachineExport(content) ? file : undefined
+      }),
+    )
+  ).filter(Boolean)
+
+  const validFilenames = indexExportSources.reduce((acc, exportSource) => {
+    const machineFile = machineFilesWithExports.find((f) =>
+      f.includes(exportSource),
+    )
+    if (machineFile) {
+      acc.push(machineFile)
+    }
+    return acc
+  }, [])
+
+  return validFilenames
 }
 
 /**
@@ -51,6 +88,12 @@ export const getMachinePaths = async (id: string) => {
 const machinePathRegex = /\.machine\.ts$/
 
 /**
+ * Checks if a machine filename matches the machine path regex.
+ */
+export const isMachineFilename = (filename: string) =>
+  machinePathRegex.test(filename)
+
+/**
  * Converts a machine filename into its corresponding `id`/`slug`.
  *
  * @example
@@ -58,9 +101,17 @@ const machinePathRegex = /\.machine\.ts$/
  */
 export const machineFilenamesToIds = (filenames: string[]) =>
   filenames
-    .filter((filename) => machinePathRegex.test(filename))
     .map((filename) => filename.replace(machinePathRegex, ''))
     .map(camelCase)
+
+const machineExportRegex = /export const \w+Machine/
+
+/**
+ * Detects if a string contains a machine export machine `export const
+ * <slug>Machine`.
+ */
+export const containsMachineExport = (source: string) =>
+  machineExportRegex.test(source)
 
 /**
  * Gets related file imports for the provided machine `slug`.
