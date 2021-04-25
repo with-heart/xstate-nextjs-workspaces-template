@@ -47,7 +47,8 @@ automatically generate routes and pages for each machine.
 In order for this to work, each machine should be defined in its own file. The
 name of this file defines the `slug` of the machine, which is used in the URL
 path for the machine. For example, `idle.machine.ts` creates a `machines/idle`
-path.
+path. The exported machine variable in that file must also match the slug
+pattern e.g. `idleMachine`.
 
 ### Versioning and publishing
 

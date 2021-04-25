@@ -1,3 +1,4 @@
+import {camelCase} from 'lodash/fp'
 import {useEffect, useState} from 'react'
 import {StateMachine} from 'xstate'
 
@@ -39,6 +40,7 @@ export const machineFilenamesToIds = (filenames: string[]) =>
   filenames
     .filter((filename) => machinePathRegex.test(filename))
     .map((filename) => filename.replace(machinePathRegex, ''))
+    .map(camelCase)
 
 /**
  * Represents various imports related to a machine.
