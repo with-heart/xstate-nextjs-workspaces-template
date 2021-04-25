@@ -1,22 +1,25 @@
+import {Box, Flex, Heading, ListItem, UnorderedList} from '@chakra-ui/layout'
 import {InferGetStaticPropsType, NextPage} from 'next'
-import Link from 'next/link'
+import {Link} from '../components/Link'
 import {getMachinesPath, machineFilenamesToIds} from '../utils/machines'
 
 const IndexPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   ids,
 }) => (
-  <div>
-    <h1>Machine List</h1>
-    <ul>
-      {ids.map((id) => (
-        <li key={id}>
-          <Link href={`/machines/${id}`}>
-            <a>{id}</a>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  </div>
+  <Flex align="center" justify="center" minH="full">
+    <Box>
+      <Heading as="h2" fontSize="3xl">
+        Machine List
+      </Heading>
+      <UnorderedList>
+        {ids.map((id) => (
+          <ListItem key={id}>
+            <Link href={`/machines/${id}`}>{id}</Link>
+          </ListItem>
+        ))}
+      </UnorderedList>
+    </Box>
+  </Flex>
 )
 
 export default IndexPage

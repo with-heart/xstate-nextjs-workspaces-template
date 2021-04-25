@@ -1,3 +1,4 @@
+import {Box} from '@chakra-ui/layout'
 import {inspect} from '@xstate/inspect'
 import {startCase} from 'lodash/fp'
 import {GetStaticPaths, InferGetStaticPropsType, NextPage} from 'next'
@@ -45,11 +46,7 @@ const MachinePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           </>
         }
         iframe={
-          <iframe
-            key="iframe"
-            ref={iframeRef}
-            style={{width: '100%', height: '100%'}}
-          />
+          <Box as="iframe" w="full" h="full" key="iframe" ref={iframeRef} />
         }
       />
     </>

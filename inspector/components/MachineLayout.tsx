@@ -1,24 +1,15 @@
+import {Box, Grid} from '@chakra-ui/layout'
+
 export const MachineLayout = (props: {
   content: React.ReactNode
   iframe: React.ReactNode
 }) => {
   return (
-    <div style={{display: 'grid', height: '100%', gridTemplateRows: '1fr 1fr'}}>
-      <div
-        style={{
-          backgroundColor: 'black',
-        }}
-      >
-        {props.iframe}
-      </div>
-      <div
-        style={{
-          overflowY: 'scroll',
-          paddingTop: '1rem',
-        }}
-      >
+    <Grid h="full" templateRows="1fr 1fr">
+      <Box bg="black">{props.iframe}</Box>
+      <Box overflowY="scroll" pt={4}>
         <div>{props.content}</div>
-      </div>
-    </div>
+      </Box>
+    </Grid>
   )
 }

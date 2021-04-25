@@ -1,21 +1,14 @@
-import Link from 'next/link'
+import {Flex, Grid, Heading} from '@chakra-ui/react'
 import {ReactNode} from 'react'
+import {Link} from './Link'
 
 export const AppLayout = ({children}: {children: ReactNode}) => (
-  <div
-    style={{
-      display: 'grid',
-      gridTemplateRows: '50px 1fr',
-      minHeight: '100vh',
-    }}
-  >
-    <header>
+  <Grid templateRows="50px 1fr" minHeight="100vh">
+    <Flex as="header" ml={3} align="center">
       <Link href="/">
-        <a>
-          <h1>Machines</h1>
-        </a>
+        <Heading as="h1">Machines</Heading>
       </Link>
-    </header>
+    </Flex>
     <div>{children}</div>
-  </div>
+  </Grid>
 )
