@@ -4,6 +4,10 @@
   "main": "dist/machines.cjs.js",
   "module": "dist/machines.esm.js",
   "author": "Mark Chandler <github@chanchan.io>",
+  "files": [
+    "dist",
+    "src"
+  ],
   "license": "MIT",
   "scripts": {
     "type-check": "tsc --noEmit"
