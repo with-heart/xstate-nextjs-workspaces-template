@@ -100,9 +100,7 @@ export const isMachineFilename = (filename: string) =>
  * machineFilenamesToIds(['test.machine.ts', 'index.ts']) // ['test']
  */
 export const machineFilenamesToIds = (filenames: string[]) =>
-  filenames
-    .map((filename) => filename.replace(machinePathRegex, ''))
-    .map(camelCase)
+  filenames.map((filename) => filename.replace(machinePathRegex, ''))
 
 const machineExportRegex = /export const \w+Machine/
 
@@ -132,7 +130,7 @@ export const useGetImports = ({
   /** Gets the machine's import. */
   const getMachineImport = async () => {
     const machineModule = await import(`machines/src/${slug}.machine`)
-    const machine = machineModule[`${slug}Machine`]
+    const machine = machineModule[`${camelCase(slug)}Machine`]
     return machine
   }
 
