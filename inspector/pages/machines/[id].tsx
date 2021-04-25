@@ -7,7 +7,7 @@ import React, {useEffect, useRef} from 'react'
 import {MachineLayout} from '../../components/MachineLayout'
 import {MachineView} from '../../components/MachineView'
 import {
-  getMachinePath,
+  getMachinePaths,
   getMachinesPath,
   machineFilenamesToIds,
   useGetImports,
@@ -16,9 +16,10 @@ import {
 const MachinePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   fileText,
   slug,
+  hasPage,
 }) => {
   const iframeRef = useRef(null)
-  const imports = useGetImports(slug)
+  const imports = useGetImports({slug, hasPage})
 
   useEffect(() => {
     const {disconnect} = inspect({
@@ -40,6 +41,7 @@ const MachinePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
               <MachineView
                 slug={slug}
                 fileText={fileText}
+                page={imports.page}
                 machine={imports.machine}
               />
             )}
@@ -56,14 +58,26 @@ const MachinePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 export default MachinePage
 
 export const getStaticProps = async ({params}: {params: {id: string}}) => {
-  const fs = (await import('fs')).promises
-  const machinePath = await getMachinePath(params.id)
-  const fileText = await fs.readFile(machinePath, 'utf-8')
+  const {constants, promises: fs} = await import('fs')
+  const paths = await getMachinePaths(params.id)
+
+  // read the machine's source
+  const fileText = await fs.readFile(paths.machine, 'utf-8')
+
+  // check if the machine has a page
+  let hasPage: boolean
+  try {
+    await fs.access(paths.page, constants.F_OK)
+    hasPage = true
+  } catch (_error) {
+    hasPage = false
+  }
 
   return {
     props: {
       slug: params.id,
       fileText,
+      hasPage,
     },
   }
 }

@@ -1,21 +1,23 @@
-import {Box} from '@chakra-ui/layout'
+import {Box, Stack} from '@chakra-ui/layout'
 import {useInterpret} from '@xstate/react'
-import {useEffect, useRef} from 'react'
+import React, {useEffect, useRef} from 'react'
 import {StateMachine} from 'xstate'
+import {MachinePageProps} from '../interfaces/MachinePageProps'
 
 export const MachineView = ({
   machine,
   fileText,
+  page: Page,
 }: {
   machine: StateMachine<any, any, any>
+  page?: React.ComponentType<MachinePageProps<any>>
   fileText: string
   slug: string
 }) => {
-  useInterpret(machine, {devTools: true})
+  const service = useInterpret(machine, {devTools: true})
   const fileTextRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    // @ts-ignore
     const hljs = window.hljs
     if (hljs) {
       hljs.highlightBlock(fileTextRef.current)
@@ -23,14 +25,21 @@ export const MachineView = ({
   }, [fileTextRef, fileText])
 
   return (
-    <Box w="full" className="hljs-container">
-      <Box maxW="6xl" py={4} mx="auto">
-        <pre>
-          <code ref={fileTextRef} className="lang-ts">
-            {fileText}
-          </code>
-        </pre>
+    <Stack w="full">
+      {Page && (
+        <Box maxW="4xl" mx="auto">
+          <Page service={service} />
+        </Box>
+      )}
+      <Box className="hljs-container">
+        <Box maxW="6xl" py={4} mx="auto">
+          <pre>
+            <code ref={fileTextRef} className="lang-ts">
+              {fileText}
+            </code>
+          </pre>
+        </Box>
       </Box>
-    </Box>
+    </Stack>
   )
 }
