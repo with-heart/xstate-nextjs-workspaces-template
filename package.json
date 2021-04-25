@@ -4,10 +4,15 @@
   "version": "0.0.0",
   "license": "MIT",
   "author": "Mark Chandler <github@chanchan.io>",
-  "workspaces": [
-    "machines",
-    "inspector"
-  ],
+  "workspaces": {
+    "packages": [
+      "machines",
+      "inspector"
+    ],
+    "nohoist": [
+      "**/machines"
+    ]
+  },
   "keywords": [
     "xstate",
     "next.js",
