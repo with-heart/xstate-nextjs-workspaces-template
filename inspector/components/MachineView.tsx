@@ -1,5 +1,5 @@
 import {useInterpret} from '@xstate/react'
-import {useRef} from 'react'
+import {useEffect, useRef} from 'react'
 import {StateMachine} from 'xstate'
 
 export const MachineView = ({
@@ -11,15 +11,38 @@ export const MachineView = ({
   slug: string
 }) => {
   useInterpret(machine, {devTools: true})
-  const fileTextRef = useRef(null)
+  const fileTextRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    // @ts-ignore
+    const hljs = window.hljs
+    if (hljs) {
+      hljs.highlightBlock(fileTextRef.current)
+    }
+  }, [fileTextRef, fileText])
 
   return (
-    <div>
-      <pre>
-        <code ref={fileTextRef} className="lang-ts">
-          {fileText}
-        </code>
-      </pre>
+    <div
+      className="hljs-container"
+      style={{
+        width: '100%',
+      }}
+    >
+      <div
+        style={{
+          maxWidth: '72rem',
+          paddingTop: '1rem',
+          paddingBottom: '1rem',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        <pre>
+          <code ref={fileTextRef} className="lang-ts">
+            {fileText}
+          </code>
+        </pre>
+      </div>
     </div>
   )
 }
