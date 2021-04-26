@@ -1,18 +1,21 @@
 import {forwardRef} from '@chakra-ui/system'
 import {useActor, useSelector} from '@xstate/react'
 import {scrollableListboxModel} from 'machines'
-import {optionModel, OptionRef} from 'machines/src/option.machine'
+import {
+  optionModel,
+  ScrollableOptionRef,
+} from 'machines/src/scrollable-option.machine'
 import {MutableRefObject, useCallback, useLayoutEffect, useRef} from 'react'
-import {StyledOption} from './components'
+import {StyledOption} from '../../components/machine-page-components'
 import {useScrollableListboxContext} from './context'
 
-export interface OptionProps {
+export interface ScrollableOptionProps {
   children: React.ReactNode
   id: string
 }
 
-interface OptionInnerProps extends OptionProps {
-  actorRef: OptionRef
+interface OptionInnerProps extends ScrollableOptionProps {
+  actorRef: ScrollableOptionRef
 }
 
 interface UseOptionParams {
@@ -22,7 +25,7 @@ interface UseOptionParams {
 
 interface UseOptionInnerParams {
   id: string
-  ref: OptionRef
+  ref: ScrollableOptionRef
 }
 
 const useOptionInner = ({id, ref}: UseOptionInnerParams) => {
@@ -56,7 +59,7 @@ const OptionInner = forwardRef<OptionInnerProps, any>(
   },
 )
 
-const useOption = ({id, ref}: UseOptionParams) => {
+const useScrollableOption = ({id, ref}: UseOptionParams) => {
   const {service} = useScrollableListboxContext()
 
   const actorRef = useSelector(
@@ -78,9 +81,9 @@ const useOption = ({id, ref}: UseOptionParams) => {
   return actorRef
 }
 
-export const Option = ({id, children}: OptionProps) => {
+export const ScrollableOption = ({id, children}: ScrollableOptionProps) => {
   const ref = useRef()
-  const actorRef = useOption({id, ref})
+  const actorRef = useScrollableOption({id, ref})
 
   return actorRef ? (
     <OptionInner ref={ref} actorRef={actorRef} id={id}>

@@ -3,12 +3,12 @@ import {ActorRefFrom, createMachine, sendParent} from 'xstate'
 import {createModel} from 'xstate/lib/model'
 import {scrollableListboxModel} from './scrollable-listbox.machine'
 
-export type OptionRef = ActorRefFrom<typeof optionMachine>
+export type ScrollableOptionRef = ActorRefFrom<typeof scrollableOptionMachine>
 
 export interface ScrollableListboxOption {
   id: string
   optionRef: () => RefObject<HTMLElement>
-  ref: ActorRefFrom<typeof optionMachine>
+  ref: ActorRefFrom<typeof scrollableOptionMachine>
 }
 
 export const optionModel = createModel(
@@ -18,27 +18,16 @@ export const optionModel = createModel(
   {
     events: {
       click: () => ({}),
-      select: () => ({}),
-      deselect: () => ({}),
     },
   },
 )
 
-export const optionMachine = createMachine<typeof optionModel>(
+export const scrollableOptionMachine = createMachine<typeof optionModel>(
   {
     id: 'option',
     context: optionModel.initialContext,
-    initial: 'deselected',
     on: {
       click: {actions: 'notifyClicked'},
-    },
-    states: {
-      deselected: {
-        on: {select: 'selected'},
-      },
-      selected: {
-        on: {deselect: 'deselected'},
-      },
     },
   },
   {

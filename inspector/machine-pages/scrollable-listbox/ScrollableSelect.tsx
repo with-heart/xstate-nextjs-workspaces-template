@@ -6,8 +6,8 @@ import {
   useLayoutEffect,
   useRef,
 } from 'react'
-import {StyledSelect} from './components'
-import {useScrollableListboxService, useSelectedOption} from './context'
+import {StyledSelect} from '../../components/machine-page-components'
+import {useScrollableListboxService} from './context'
 
 export interface SelectProps {
   children: ReactNode
@@ -20,7 +20,7 @@ const keyMap = {
   End: scrollableListboxModel.events.end,
 }
 
-const useSelect = (ref: MutableRefObject<HTMLElement>) => {
+const useScrollableSelect = (ref: MutableRefObject<HTMLElement>) => {
   const [state, send] = useScrollableListboxService()
   const selected = state.context.selected
 
@@ -41,13 +41,15 @@ const useSelect = (ref: MutableRefObject<HTMLElement>) => {
   return {selected, onFocus, onBlur, onKeyDown}
 }
 
-export const Select = ({children}: SelectProps) => {
+export const ScrollableSelect = ({children}: SelectProps) => {
   const ref = useRef()
-  const {selected, ...selectProps} = useSelect(ref)
+  const {selected, ...selectProps} = useScrollableSelect(ref)
 
   return (
     <StyledSelect
       ref={ref}
+      maxH="18em"
+      overflowY="auto"
       role="listbox"
       aria-labelledby="listbox-header"
       aria-activedescendant={selected}

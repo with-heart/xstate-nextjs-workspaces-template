@@ -1,7 +1,10 @@
 import {RefObject} from 'react'
 import {createMachine, spawn} from 'xstate'
-import {createModel, ModelContextFrom, ModelEventsFrom} from 'xstate/lib/model'
-import {optionMachine, ScrollableListboxOption} from './option.machine'
+import {createModel} from 'xstate/lib/model'
+import {
+  scrollableOptionMachine,
+  ScrollableListboxOption,
+} from './scrollable-option.machine'
 
 interface RefGetter {
   (): RefObject<HTMLElement>
@@ -34,7 +37,7 @@ export const scrollableListboxMachine = createMachine<
   typeof scrollableListboxModel
 >(
   {
-    id: 'single-select',
+    id: 'scrollable-listbox',
     context: scrollableListboxModel.initialContext,
     initial: 'blurred',
     states: {
@@ -117,9 +120,9 @@ export const scrollableListboxMachine = createMachine<
               id: event.id,
               optionRef: event.getRef,
               ref: spawn(
-                optionMachine.withContext({
+                scrollableOptionMachine.withContext({
                   id: event.id,
-                }) as typeof optionMachine,
+                }) as typeof scrollableOptionMachine,
                 `option-${event.id}`,
               ),
             }

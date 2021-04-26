@@ -1,6 +1,6 @@
 import {chakra} from '@chakra-ui/system'
 
-export const Listbox = chakra('div', {
+export const ListboxContainer = chakra('div', {
   baseStyle: {
     p: 4,
     rounded: 'md',
@@ -13,8 +13,7 @@ export const Listbox = chakra('div', {
 export const StyledSelect = chakra('ul', {
   baseStyle: {
     position: 'relative',
-    maxH: '18em',
-    overflowY: 'auto',
+    listStyle: 'none',
     bg: 'gray.50',
     py: 2,
     rounded: 'sm',
