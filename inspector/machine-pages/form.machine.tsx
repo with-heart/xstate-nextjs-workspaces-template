@@ -1,15 +1,15 @@
 import {Box} from '@chakra-ui/layout'
 import {useService} from '@xstate/react'
-import {idleMachine} from 'machines'
+import {formMachine} from '../../machines/src'
 import {MachinePageProps} from '../interfaces/MachinePageProps'
 
-export default function IdleMachinePage({
+export default function FormMachinePage({
   service,
-}: MachinePageProps<typeof idleMachine>) {
+}: MachinePageProps<typeof formMachine>) {
   const [state, send] = useService(service)
   return (
     <Box>
-      <h1>The Idle Machine!</h1>
+      <h1>The Form Machine</h1>
       <p>Current State: {state.value}</p>
     </Box>
   )
