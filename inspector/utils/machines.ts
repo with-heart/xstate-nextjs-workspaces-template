@@ -37,7 +37,7 @@ export const exportedMachineFilenames = async (fs: fs) => {
 
   const validFilenames = indexExportSources.reduce((acc, exportSource) => {
     const machineFile = machineFilesWithExports.find((f) =>
-      f.includes(exportSource),
+      f?.includes(exportSource),
     )
     if (machineFile) {
       acc.push(machineFile)
@@ -81,7 +81,7 @@ export const getMachinePaths = async (id: string) => {
   const machinesPath = await getMachinesPath()
   const machinePagesPath = await getMachinePagesPath()
   const machinePath = path.resolve(machinesPath, `${id}.machine.ts`)
-  const pagePath = path.resolve(machinePagesPath, `${id}.machine.tsx`)
+  const pagePath = path.resolve(machinePagesPath, `${id}.machine`)
   return {machine: machinePath, page: pagePath}
 }
 

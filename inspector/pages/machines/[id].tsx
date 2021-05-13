@@ -24,7 +24,7 @@ const MachinePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   useEffect(() => {
     const {disconnect} = inspect({
       iframe: () => iframeRef.current,
-    })
+    })!
 
     return disconnect
   }, [slug])
