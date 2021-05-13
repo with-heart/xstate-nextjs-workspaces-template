@@ -19,7 +19,7 @@ export const MachineView = ({
 
   useEffect(() => {
     const hljs = window.hljs
-    if (hljs) {
+    if (hljs && fileTextRef.current) {
       hljs.highlightBlock(fileTextRef.current)
     }
   }, [fileTextRef, fileText])
