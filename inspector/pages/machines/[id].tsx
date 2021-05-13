@@ -64,11 +64,23 @@ export const getStaticProps = async ({params}: {params: {id: string}}) => {
   // read the machine's source
   const fileText = await fs.readFile(paths.machine, 'utf-8')
 
-  // check if the machine has a page
+  // check if the machine has an importable page
   let hasPage: boolean
+
+  // check if it's a directory
   try {
     await fs.access(paths.page, constants.F_OK)
     hasPage = true
+  } catch (_error) {
+    hasPage = false
+  }
+
+  // if not a directory, check if it's a file
+  try {
+    if (!hasPage) {
+      await fs.access(`${paths.page}.tsx`)
+      hasPage = true
+    }
   } catch (_error) {
     hasPage = false
   }

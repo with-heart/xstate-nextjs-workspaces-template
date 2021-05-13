@@ -1,5 +1,4 @@
 import {Box, Stack} from '@chakra-ui/layout'
-import {useInterpret} from '@xstate/react'
 import React, {useEffect, useRef} from 'react'
 import {StateMachine} from 'xstate'
 import {MachinePageProps} from '../interfaces/MachinePageProps'
@@ -14,7 +13,6 @@ export const MachineView = ({
   fileText: string
   slug: string
 }) => {
-  const service = useInterpret(machine, {devTools: true})
   const fileTextRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -28,7 +26,7 @@ export const MachineView = ({
     <Stack w="full">
       {Page && (
         <Box maxW="4xl" mx="auto">
-          <Page service={service} />
+          <Page machine={machine} />
         </Box>
       )}
       <Box className="hljs-container">

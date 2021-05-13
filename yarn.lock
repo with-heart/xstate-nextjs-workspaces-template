@@ -7746,6 +7746,11 @@ xmlchars@^2.2.0:
   resolved "https://registry.yarnpkg.com/xmlchars/-/xmlchars-2.2.0.tgz#060fe1bcb7f9c76fe2a17db86a9bc3ab894210cb"
   integrity sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==
 
+xstate-helpers@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/xstate-helpers/-/xstate-helpers-0.10.2.tgz#e5722131094c13c80de928ddd1a0dcb939b7b77f"
+  integrity sha512-tzHxtF1nGmvOcV+vixbp0FNiGsz6oih84mOm0sknzWiylw1rLgkNMqDhgY4EUC/edyZOooq0/Kf8Wk0l7guh4w==
+
 xstate@^4.17.0:
   version "4.18.0"
   resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.18.0.tgz#64a0002cc7deca1cb1891f002bbe786193e97497"
